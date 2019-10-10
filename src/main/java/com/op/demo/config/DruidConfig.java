@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * Druid 数据源、监控配置
- * @author im
+ * @author impact  2019-10-10
  */
 @Configuration
 public class DruidConfig {
@@ -36,7 +36,7 @@ public class DruidConfig {
     @Bean
     public ServletRegistrationBean statViewServlet(){
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
-        Map<String,String> initParams = new HashMap<>();
+        Map<String,String> initParams = new HashMap<>(16);
         initParams.put("loginUsername","admin");
         initParams.put("loginPassword","123456");
         //默认就是允许所有访问
@@ -54,7 +54,7 @@ public class DruidConfig {
     public FilterRegistrationBean webStatFilter(){
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(new WebStatFilter());
-        Map<String,String> initParams = new HashMap<>();
+        Map<String,String> initParams = new HashMap<>(16);
         initParams.put("exclusions","/druid/*");
         bean.setInitParameters(initParams);
         bean.setUrlPatterns(Arrays.asList("/*"));
